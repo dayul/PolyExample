@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,24 +12,28 @@ namespace PolyExample
         static void Main(string[] args)
         {
             // List 변수명은 복수로
-            List<Dog> Dogs = new List<Dog>() {new Dog(), new Dog(), new Dog()};
-            List<Cat> Cats = new List<Cat>() { new Cat(), new Cat(), new Cat() };
+            List<Animal> Animals = new List<Animal>() {
+                new Dog(), new Dog(), new Dog(),
+                new Cat(), new Cat(), new Cat()
+            };
 
             // var는 타입 추론
-            foreach(var item in Dogs)
+            foreach(var item in Animals)
             {
                 item.Eat();
                 item.Sleep();
-                item.Bark();
+                
+                if(item is Dog)
+                {
+                    ((Dog)item).Bark();
+                }
+                Cat cat = item as Cat;
+                 
+                if(cat != null)
+                {
+                   cat.Meow();
+                }
             }
-
-            foreach (var item in Cats)
-            {
-                item.Eat();
-                item.Sleep();
-                item.Meow();
-            }
-
         }
     }
 }
